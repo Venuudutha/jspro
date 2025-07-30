@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFinder - Find Your Dream Job</title>
+</head>
+<style>
+    
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --accent-color: #3b82f6;
+    --text-color: #1f2937;
+    --text-light: #6b7280;
+    --bg-color: #ffffff;
+    --bg-light: #f9fafb;
+    --border-color: #e5e7eb;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.section-subtitle {
+    color: var(--text-light);
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Header Styles */
+header {
+    background-color: var(--bg-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.auth-buttons .login-btn {
+    background-color: transparent;
+    color: var(--text-color);
+    margin-right: 15px;
+}
+
+.auth-buttons .register-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.hero {
+    background-color: var(--bg-light);
+    padding-top: 120px;
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-image {
+    flex: 1;
+}
+
+.hero-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: var(--primary-color);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.search-input {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    border-right: 1px solid var(--border-color);
+}
+
+.search-input:last-child {
+    border-right: none;
+}
+
+.search-input i {
+    color: var(--text-light);
+    margin-right: 10px;
+}
+
+.search-input input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 0;
+    font-size: 1rem;
+}
+
+.search-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.search-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.popular-searches {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.popular-searches span {
+    color: var(--text-light);
+}
+
+.popular-searches a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.popular-searches a:hover {
+    text-decoration: underline;
+}
+
+/* Categories Section */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.category-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.category-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.category-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.category-card p {
+    color: var(--text-light);
+}
+
+
+.jobs-filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    border: none;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.filter-btn:hover:not(.active) {
+    background-color: var(--border-color);
+}
+
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.job-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.job-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.job-company-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.job-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.job-company {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.job-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.job-detail {
+    display: flex;
+    align-items: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.job-detail i {
+    margin-right: 5px;
+    color: var(--primary-color);
+}
+
+.job-salary {
+    font-weight: 600;
+    color: var(--success-color);
+}
+
+.job-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.job-type {
+    padding: 5px 15px;
+    background-color: #dbeafe;
+    color: var(--primary-color);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.view-all-btn {
+    display: block;
+    margin: 50px auto 0;
+    padding: 12px 30px;
+}
+
+
+.companies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.company-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+}
+
+.company-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.company-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background-color: var(--bg-light);
+    padding: 15px;
+}
+
+.company-card h3 {
+    margin-bottom: 10px;
+}
+
+.company-card p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+
+.testimonials {
+    background-color: var(--bg-light);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.testimonial-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-content {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.testimonial-content i {
+    font-size: 2rem;
+    color: var(--border-color);
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+.testimonial-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-light);
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+}
+
+.testimonial-author img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.testimonial-author h4 {
+    margin-bottom: 5px;
+}
+
+.testimonial-author p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+
+.newsletter {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 60px 0;
+}
+
+.newsletter-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.newsletter h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.newsletter p {
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 6px 0 0 6px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.newsletter-form button {
+    padding: 15px 25px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.contact-item i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-top: 5px;
+}
+
+.contact-item h3 {
+    margin-bottom: 5px;
+}
+
+.contact-item p {
+    color: var(--text-light);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--primary-color);
+}
+
+.contact-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+
+footer {
+    background-color: #111827;
+    color: white;
+    padding: 80px 0 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-col h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.footer-col p {
+    color: #9ca3af;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #1f2937;
+    border-radius: 50%;
+    color: white;
+    transition: all 0.3s;
+}
+
+.social-links a:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 15px;
+}
+
+.footer-col ul li a {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #1f2937;
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+
+@media (max-width: 992px) {
+    .hero .container {
+        flex-direction: column;
+    }
+    
+    .hero-content,
+    .hero-image {
+        flex: none;
+        width: 100%;
+    }
+    
+    .hero-image {
+        margin-top: 40px;
+    }
+    
+    .search-box {
+        flex-direction: column;
+    }
+    
+    .search-input {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px;
+    }
+    
+    .search-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links,
+    .auth-buttons {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    section {
+        padding: 60px 0;
+    }
+    
+    .jobs-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .popular-searches {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-form input {
+        border-radius: 6px;
+    }
+    
+    .newsletter-form button {
+        border-radius: 6px;
+        margin-top: 10px;
+    }
+}
+</style>
+<body>
+   
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFinder</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>Job<span>Finder</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#jobs">Jobs</a></li>
+                    <li><a href="#companies">Companies</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <!-- User Profile Section -->
+                <div id="user-profile">
+                    <!-- Populated by JavaScript -->
+                </div>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    
+    <input type="file" id="resume-input" accept=".pdf,.doc,.docx" style="display: none;" />
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Find Your <span>Dream</span> Job Today</h1>
+                <p>Thousands of jobs available for you to explore and apply</p>
+                <div class="search-box">
+                    <div class="search-input">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Job title, keywords, or company" id="search-keyword">
+                    </div>
+                    <div class="search-input">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" placeholder="Location" id="search-location">
+                    </div>
+                    <button class="search-btn">Search Jobs</button>
+                </div>
+                <div class="popular-searches">
+                    <span>Popular Searches:
+                    Developer
+                    Designer
+                    Marketing
+                    Remote</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1169&amp;q=80" alt="People working">
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Browse by Categories</h2>
+            <p class="section-subtitle">Find jobs in your field of interest</p>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Development</h3>
+                    <p>1,200 Jobs</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Design</h3>
+                    <p>850 Jobs</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Marketing</h3>
+                    <p>1,500 Jobs</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Business</h3>
+                    <p>2,300 Jobs</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Customer Service</h3>
+                    <p>1,000 Jobs</p>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Education</h3>
+                    <p>750 Jobs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-jobs" id="jobs">
+        <div class="container">
+            <h2 class="section-title">Featured Jobs</h2>
+            <p class="section-subtitle">Find your next career opportunity</p>
+            <div class="jobs-filter">
+                <button class="filter-btn active">All Jobs</button>
+                <button class="filter-btn">Full-time</button>
+                <button class="filter-btn">Part-time</button>
+                <button class="filter-btn">Remote</button>
+                <button class="filter-btn">Contract</button>
+            </div>
+            <div class="jobs-grid" id="jobs-container">
+               
+            </div>
+            <button class="view-all-btn">View All Jobs</button>
+        </div>
+    </section>
+
+    <section class="companies" id="companies">
+        <div class="container">
+            <h2 class="section-title">Top Companies Hiring</h2>
+            <p class="section-subtitle">Work with the best companies in the industry</p>
+            <div class="companies-grid">
+                <div class="company-card">
+                    <img src="https://logo.clearbit.com/google.com" alt="Google">
+                    <h3>Google India</h3>
+                    <p>120 Open Positions</p>
+                </div>
+                <div class="company-card">
+                    <img src="https://logo.clearbit.com/tcs.com" alt="TCS">
+                    <h3>Tata Consultancy Services</h3>
+                    <p>95 Open Positions</p>
+                </div>
+                <div class="company-card">
+                    <img src="https://logo.clearbit.com/infosys.com" alt="Infosys">
+                    <h3>Infosys</h3>
+                    <p>80 Open Positions</p>
+                </div>
+                <div class="company-card">
+                    <img src="https://logo.clearbit.com/amazon.in" alt="Amazon India">
+                    <h3>Amazon India</h3>
+                    <p>150 Open Positions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Success Stories</h2>
+            <p class="section-subtitle">What our candidates say about us</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left"></i>
+                        <p>I found my dream job through JobFinder within two weeks of searching. The platform is easy to use and has great opportunities.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="data:image/jpeg;base64,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" alt="Sarah Johnson">
+                        <div>
+                            <h4>Shruti</h4>
+                            <p>UX Designer at Google India</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left"></i>
+                        <p>The job matching algorithm is fantastic! It connected me with positions that perfectly matched my skills and experience.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="data:image/jpeg;base64,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" alt="Michael Chen">
+                        <div>
+                            <h4>Rajkumar</h4>
+                            <p>Senior Developer at TCS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Get Job Alerts</h2>
+                <p>Subscribe to our newsletter and get the latest job openings delivered to your inbox</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">Have questions? Get in touch with our team</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <p>Hyderabad,Gachibowli</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+91 987****10</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>carrer@jobfinder.in</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>JobFinder</h3>
+                    <p>Connecting talented professionals with great companies since 2020.</p>
+                    <div class="social-links">
+                        <a href="facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>For Candidates</h3>
+                    <ul>
+                        <li><a href="Browse Jobs">Browse Jobs</a></li>
+                        <li><a href="Candidate Dashboard">Candidate Dashboard</a></li>
+                        <li><a href="Job Alerts">Job Alerts</a></li>
+                        <li><a href="My Bookmarks">My Bookmarks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>For Employers</h3>
+                    <ul>
+                        <li><a href="Browse Candidates">Browse Candidates</a></li>
+                        <li><a href="Employer Dashboard">Employer Dashboard</a></li>
+                        <li><a href="Post a Job">Post a Job</a></li>
+                        <li><a href="Pricing Plans">Pricing Plans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Helpful Links</h3>
+                    <ul>
+                        <li><a href="About Us">About Us</a></li>
+                        <li><a href="Contact Us">Contact Us</a></li>
+                        <li><a href="Privacy Policy">Privacy Policy</a></li>
+                        <li><a href="Terms of Service">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 JobFinder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        const user = {
+            name:"user",
+            avatar: "https://png.pngtree.com/png-clipart/20220909/original/pngtree-man-avatar-with-circle-frame-vector-ilustration-png-image_8515464.png"
+        };
+
+        
+        const userProfileDiv = document.getElementById('user-profile');
+        userProfileDiv.innerHTML = `
+            <div class="profile-container">
+                <img src="${user.avatar}" alt="${user.name}" class="profile-avatar" style="width: 32px; height: 32px; border-radius: 50%; vertical-align: middle;">
+                <span class="profile-name" style="margin-left: 8px;">${user.name}</span>
+            </div>
+        `;
+
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+       
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            userProfileDiv.classList.toggle('active');
+        });
+
+       
+        let resumeUploaded = false;
+        const resumeInput = document.getElementById('resume-input');
+        resumeInput.addEventListener('change', function() {
+            if (resumeInput.files.length > 0) {
+                resumeUploaded = true;
+                alert('Resume uploaded successfully. Application submitted.');
+            }
+        });
+
+        
+        const jobs = [
+            {
+                id: 1,
+                title: "Frontend Developer",
+                company: "Amazon",
+                logo: "https://www.digiseller.ru/preview/1137368/p1_4098361_09c6fed2.png",
+                location: "Bangalore, Karnataka",
+                type: "Full-time",
+                salary: "₹6,00,000 - ₹10,00,000",
+                posted: "2 days ago",
+                skills: ["HTML", "CSS", "JavaScript", "React"]
+            },
+            {
+                id: 2,
+                title: "UX Designer",
+                company: "Absyz",
+                logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMz4M6kr3xa22-71oR9vYSUG1ryU2JbnXZ3Q&s",
+                location: "Remote (India)",
+                type: "Remote",
+                salary: "₹5,00,000 - ₹8,00,000",
+                posted: "1 week ago",
+                skills: ["Figma", "Sketch", "UI/UX", "Prototyping"]
+            },
+            {
+                id: 3,
+                title: "Backend Engineer",
+                company: "DataSystems India",
+                logo: "https://logo.clearbit.com/datasystems.com",
+                location: "Hyderabad, Telangana",
+                type: "Full-time",
+                salary: "₹7,00,000 - ₹12,00,000",
+                posted: "3 days ago",
+                skills: ["Node.js", "Python", "SQL", "AWS"]
+            },
+            {
+                id: 4,
+                title: "Marketing Specialist",
+                company: "GrowthMarketing India",
+                logo: "https://logo.clearbit.com/growthmarketing.com",
+                location: "Mumbai, Maharashtra",
+                type: "Part-time",
+                salary: "₹3,00,000 - ₹5,00,000",
+                posted: "5 days ago",
+                skills: ["SEO", "Content Marketing", "Social Media", "Analytics"]
+            },
+            {
+                id: 5,
+                title: "Data Scientist",
+                company: "Nvida",
+                logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXK319IQRCV1teOewyCzJgFj5DMZUESyGLJw&s",
+                location: "Pune, Maharashtra",
+                type: "Full-time",
+                salary: "₹8,00,000 - ₹15,00,000",
+                posted: "1 day ago",
+                skills: ["Python", "Machine Learning", "TensorFlow", "Data Analysis"]
+            },
+            {
+                id: 6,
+                title: "Product Manager",
+                company: "Microsoft",
+                logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHmKPHl1z-cAF4FeZOjsOdiFYJKamL-o-8gw&s",
+                location: "Gurgaon, Haryana",
+                type: "Contract",
+                salary: "₹10,00,000 - ₹18,00,000",
+                posted: "2 weeks ago",
+                skills: ["Agile", "Product Strategy", "Market Research", "Roadmapping"]
+            },
+            {
+                id: 7,
+                title: "Full Stack Developer",
+                company: "Tech Mahindra",
+                logo: "https://logo.clearbit.com/techmahindra.com",
+                location: "Chennai, Tamil Nadu",
+                type: "Full-time",
+                salary: "₹7,50,000 - ₹13,00,000",
+                posted: "4 days ago",
+                skills: ["JavaScript", "Node.js", "Angular", "MongoDB"]
+            },
+            {
+                id: 8,
+                title: "Digital Marketing Executive",
+                company: "Wipro",
+                logo: "https://logo.clearbit.com/wipro.com",
+                location: "Noida, Uttar Pradesh",
+                type: "Full-time",
+                salary: "₹4,50,000 - ₹7,00,000",
+                posted: "3 days ago",
+                skills: ["Google Ads", "Facebook Ads", "Analytics", "Content"]
+            },
+            {
+                id: 9,
+                title: "Systems Analyst",
+                company: "HCL Technologies",
+                logo: "https://logo.clearbit.com/hcl.com",
+                location: "Delhi, Delhi",
+                type: "Full-time",
+                salary: "₹6,50,000 - ₹11,00,000",
+                posted: "5 days ago",
+                skills: ["Systems Design", "SQL", "Requirement Gathering", "UML"]
+            },
+            {
+                id: 10,
+                title: "Business Analyst",
+                company: "Accenture India",
+                logo: "https://logo.clearbit.com/accenture.com",
+                location: "Mumbai, Maharashtra",
+                type: "Contract",
+                salary: "₹8,00,000 - ₹12,00,000",
+                posted: "1 week ago",
+                skills: ["Business Analysis", "Stakeholder Management", "Data Modeling", "Agile"]
+            },
+            {
+                id: 11,
+                title: "AI, ML",
+                company: "Deloitte",
+                logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm3CkQbpLMOT2-dQuPS-dJHx7DqnIAGS07VA&s",
+                location: "Noida, Uttar Pradesh",
+                type: "Full-time",
+                salary: "₹4,50,000 - ₹7,00,000",
+                posted: "3 days ago",
+                skills: ["Google Ads", "Facebook Ads", "Analytics", "Content"]
+            },
+            {
+                id: 12,
+                title: "Product Manager",
+                company: "Accenture India",
+                logo: "https://logo.clearbit.com/accenture.com",
+                location: "Chennai",
+                type: "Contract",
+                salary: "₹18,00,000 - ₹25,00,000",
+                posted: "1 week ago",
+                skills: ["Business Analysis", "Stakeholder Management", "Data Modeling", "Agile"]
+            }
+        ];
+
+        const jobsContainer = document.getElementById('jobs-container');
+
+        
+        function displayJobs(jobsToDisplay) {
+            jobsContainer.innerHTML = '';
+            
+            jobsToDisplay.forEach(job => {
+                const jobCard = document.createElement('div');
+                jobCard.className = 'job-card';
+                jobCard.innerHTML = `
+                    <div class="job-header">
+                        <img src="${job.logo}" alt="${job.company}" class="job-company-logo" style="width: 40px; height: 40px; vertical-align: middle; object-fit: contain;">
+                        <div style="display: inline-block; margin-left: 8px; vertical-align: middle;">
+                            <h3 class="job-title" style="margin: 0;">${job.title}</h3>
+                            <p class="job-company" style="margin: 0; font-size: 0.9em; color: #666;">${job.company}</p>
+                        </div>
+                    </div>
+                    <div class="job-details" style="margin-top: 8px;">
+                        <div class="job-detail" style="display: inline-block; margin-right: 16px;">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${job.location}</span>
+                        </div>
+                        <div class="job-detail" style="display: inline-block;">
+                            <i class="far fa-clock"></i>
+                            <span>${job.posted}</span>
+                        </div>
+                    </div>
+                    <div class="job-skills" style="margin-top: 8px;">
+                        ${job.skills.map(skill => `<span class="skill-tag" style="display: inline-block; margin: 2px 4px; padding: 2px 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8em;">${skill}</span>`).join('')}
+                    </div>
+                    <div class="job-footer" style="margin-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span class="job-salary" style="font-weight: bold;">${job.salary}</span>
+                            <span class="job-type" style="margin-left: 8px; font-size: 0.9em; color: #666;">${job.type}</span>
+                        </div>
+                        <button class="apply-btn" data-job-id="${job.id}" style="padding: 6px 12px; border: none; border-radius: 4px; background: #007bff; color: #fff; cursor: pointer;">Apply</button>
+                    </div>
+                    <hr style="margin-top: 12px; border: none; border-top: 1px solid #eee;">
+                `;
+                jobsContainer.appendChild(jobCard);
+            });
+
+            document.querySelectorAll('.apply-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!resumeUploaded) {
+                        resumeInput.click();
+                    } else {
+                        alert('Applied successfully!');
+                    }
+                });
+            });
+        }
+
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filterValue = this.textContent;
+                let filteredJobs = jobs;
+                
+                if (filterValue !== 'All Jobs') {
+                    filteredJobs = jobs.filter(job => job.type === filterValue);
+                }
+                
+                displayJobs(filteredJobs);
+            });
+        });
+
+        displayJobs(jobs);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    navLinks.classList.remove('active');
+                    userProfileDiv.classList.remove('active');
+                }
+            });
+        });
+
+        const newsletterForm = document.querySelector('.newsletter-form');
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            
+            if (email) {
+                alert(`Thank you for subscribing with ${email}! You'll receive job alerts soon.`);
+                emailInput.value = '';
+            }
+        });
+
+       
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+       
+        const searchBtn = document.querySelector('.search-btn');
+        searchBtn.addEventListener('click', function() {
+            const keyword = document.getElementById('search-keyword').value.trim().toLowerCase();
+            const location = document.getElementById('search-location').value.trim().toLowerCase();
+            let filteredJobs = jobs;
+
+            if (keyword) {
+                filteredJobs = filteredJobs.filter(job =>
+                    job.title.toLowerCase().includes(keyword) ||
+                    job.company.toLowerCase().includes(keyword) ||
+                    job.skills.some(skill => skill.toLowerCase().includes(keyword))
+                );
+            }
+
+            if (location) {
+                filteredJobs = filteredJobs.filter(job =>
+                    job.location.toLowerCase().includes(location)
+                );
+            }
+
+            displayJobs(filteredJobs);
+
+            if (filteredJobs.length === 0) {
+                jobsContainer.innerHTML = `
+                    <div class="no-results" style="text-align: center; padding: 20px;">
+                        <h3>No jobs found matching your search criteria</h3>
+                        <p>Try different keywords or locations</p>
+                    </div>
+                `;
+            } else {
+                document.getElementById('jobs').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+    </script>
+</body>
+</html>
